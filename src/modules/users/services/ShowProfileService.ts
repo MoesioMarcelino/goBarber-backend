@@ -5,7 +5,6 @@ import AppError from '@shared/errors/AppError';
 import User from '@modules/users/infra/typeorm/entities/Users';
 
 import UsersRepositoryInterface from '@modules/users/repositories/UsersRepositoryInterface';
-import HashProviderInterface from '@modules/users/providers/HashProviders/models/HashProviderInterface';
 
 interface Request {
   user_id: string;
