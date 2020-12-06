@@ -11,8 +11,8 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import StorageProviderInterface from '@shared/container/providers/StorageProviders/models/StorageProvidersInterface';
 import DiskStorageProvider from '@shared/container/providers/StorageProviders/implementations/DiskStorageProvider';
 
-// import UserTokensInterface from '@modules/users/repositories/UserTokenRepositoryInterface';
-// import DiskStorageProvider from '@shared/container/providers/StorageProviders/implementations/DiskStorageProvider';
+import UserTokensRepositoryInterface from '@modules/users/repositories/UserTokensRepositoryInterface';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
 container.registerSingleton<AppointmentsRepositoryInterface>(
   'AppointmentRepository',
@@ -27,4 +27,9 @@ container.registerSingleton<UsersRepositoryInterface>(
 container.registerSingleton<StorageProviderInterface>(
   'StorageProvider',
   DiskStorageProvider,
+);
+
+container.registerSingleton<UserTokensRepositoryInterface>(
+  'UserTokensRepository',
+  UserTokensRepository,
 );

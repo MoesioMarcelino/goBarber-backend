@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 
 import UsersRepositoryInterface from '@modules/users/repositories/UsersRepositoryInterface';
 import EmailProviderInterface from '@shared/container/providers/MailProvider/models/MailProviderInterface';
-import UserTokensRepositoryInterface from '@modules/users/repositories/UserTokenRepositoryInterface';
+import UserTokensRepositoryInterface from '@modules/users/repositories/UserTokensRepositoryInterface';
 
 interface Request {
   email: string;

@@ -1,13 +1,11 @@
 import { inject, injectable } from 'tsyringe';
-import { isAfter, addHours, differenceInHours } from 'date-fns';
-
-// import AppError from '@shared/errors/AppError';
-
-import UsersRepositoryInterface from '@modules/users/repositories/UsersRepositoryInterface';
-import UserTokensRepositoryInterface from '@modules/users/repositories/UserTokenRepositoryInterface';
-import HashProviderInterface from '@modules/users/providers/HashProviders/models/HashProviderInterface';
+import { differenceInHours } from 'date-fns';
 
 import AppError from '@shared/errors/AppError';
+
+import UsersRepositoryInterface from '@modules/users/repositories/UsersRepositoryInterface';
+import UserTokensRepositoryInterface from '@modules/users/repositories/UserTokensRepositoryInterface';
+import HashProviderInterface from '@modules/users/providers/HashProviders/models/HashProviderInterface';
 
 interface Request {
   token: string;
