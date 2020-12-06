@@ -17,6 +17,9 @@ import UserTokensRepository from '@modules/users/infra/typeorm/repositories/User
 import MailProviderInterface from '@shared/container/providers/MailProvider/models/MailProviderInterface';
 import EtherealMailProvider from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider';
 
+import MailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/MailTemplateProviderInterface';
+import HandlebarsMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/implementations/HandleBarsMailTemplateProvider';
+
 container.registerSingleton<AppointmentsRepositoryInterface>(
   'AppointmentRepository',
   AppointmentRepository,
@@ -37,7 +40,12 @@ container.registerSingleton<UserTokensRepositoryInterface>(
   UserTokensRepository,
 );
 
+container.registerSingleton<MailTemplateProvider>(
+  'MailTemplateProvider',
+  HandlebarsMailTemplateProvider,
+);
+
 container.registerInstance<MailProviderInterface>(
   'MailProvider',
-  new EtherealMailProvider(),
+  container.resolve(EtherealMailProvider),
 );
