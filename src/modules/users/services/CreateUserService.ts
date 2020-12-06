@@ -14,10 +14,10 @@ interface Request {
 @injectable()
 class CreateUserService {
   constructor(
-    @inject('UsersRespository')
+    @inject('UsersRepository')
     private usersRepository: UsersRepositoryInterface,
 
-    @inject('BCryptHashProvider')
+    @inject('HashProvider')
     private hashProvider: HashProviderInterface,
   ) {}
 

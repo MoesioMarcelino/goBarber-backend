@@ -15,7 +15,7 @@ interface Request {
 @injectable()
 class ResetPasswordService {
   constructor(
-    @inject('UsersRespository')
+    @inject('UsersRepository')
     private usersRepository: UsersRepositoryInterface,
 
     @inject('UserTokensRepository')

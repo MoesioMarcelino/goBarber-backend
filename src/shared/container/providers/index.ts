@@ -14,6 +14,9 @@ import DiskStorageProvider from '@shared/container/providers/StorageProviders/im
 import UserTokensRepositoryInterface from '@modules/users/repositories/UserTokensRepositoryInterface';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
+import MailProviderInterface from '@shared/container/providers/MailProvider/models/MailProviderInterface';
+import EtherealMailProvider from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider';
+
 container.registerSingleton<AppointmentsRepositoryInterface>(
   'AppointmentRepository',
   AppointmentRepository,
@@ -32,4 +35,9 @@ container.registerSingleton<StorageProviderInterface>(
 container.registerSingleton<UserTokensRepositoryInterface>(
   'UserTokensRepository',
   UserTokensRepository,
+);
+
+container.registerInstance<MailProviderInterface>(
+  'MailProvider',
+  new EtherealMailProvider(),
 );
