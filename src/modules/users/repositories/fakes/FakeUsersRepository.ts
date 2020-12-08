@@ -3,6 +3,7 @@ import CreateAppointmentDTO from '@modules/users/dtos/CreateUserDTO';
 
 import User from '@modules/users/infra/typeorm/entities/Users';
 import { uuid } from 'uuidv4';
+import FindAllProvidersDTO from '@modules/users/dtos/FindAllProvidersDTO';
 
 class UsersRepository implements UsersRepositoryInterface {
   private users: User[] = [];
@@ -35,6 +36,22 @@ class UsersRepository implements UsersRepositoryInterface {
     this.users[findIndex] = user;
 
     return user;
+  }
+
+  public async findAllProviders({
+    expect_user_id,
+  }: FindAllProvidersDTO): Promise<User[]> {
+    let { users } = this;
+
+    if (expect_user_id) {
+      users = this.users.filter(user => user.id !== expect_user_id);
+    }
+
+    return users;
+  }
+
+  public async findAllUsers(): Promise<User[]> {
+    return this.users;
   }
 }
 

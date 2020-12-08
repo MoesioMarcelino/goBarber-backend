@@ -22,4 +22,8 @@ usersRouter.patch(
   userAvatarController.update,
 );
 
+usersRouter.use(ensureAuthenticated);
+
+usersRouter.get('/', usersControllers.index);
+
 export default usersRouter;
