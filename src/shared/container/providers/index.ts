@@ -21,7 +21,7 @@ import MailTemplateProvider from '@shared/container/providers/MailTemplateProvid
 import HandlebarsMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/implementations/HandleBarsMailTemplateProvider';
 
 container.registerSingleton<AppointmentsRepositoryInterface>(
-  'AppointmentRepository',
+  'AppointmentsRepository',
   AppointmentRepository,
 );
 
