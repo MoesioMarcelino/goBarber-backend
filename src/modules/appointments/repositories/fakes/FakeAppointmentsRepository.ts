@@ -7,6 +7,7 @@ import CreateAppointmentDTO from '@modules/appointments/dtos/CreateAppointmentDT
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import FindAllInMonthFromProviderDTO from '@modules/appointments/dtos/FindAllInMonthFromProviderDTO';
 import FindAllInDayFromProviderDTO from '@modules/appointments/dtos/FindAllInDayFromProviderDTO';
+import ListAppoinemtnsDTO from '@modules/appointments/dtos/ListAppointmentsDTO';
 
 class FakeAppointmentsRepository implements AppointmentsRepositoryInterface {
   private appointments: Appointment[] = [];
@@ -65,10 +66,18 @@ class FakeAppointmentsRepository implements AppointmentsRepositoryInterface {
     return appointments;
   }
 
-  public async findAppointments(provider_id: string): Promise<Appointment[]> {
-    const appointments = this.appointments.filter(
-      appointment => appointment.provider_id === provider_id,
-    );
+  public async findAppointments({
+    provider_id,
+    year,
+    month,
+    day,
+  }: ListAppoinemtnsDTO): Promise<Appointment[]> {
+    const appointments = this.appointments.filter(appointment => {
+      return (
+        appointment.provider_id === provider_id &&
+        appointment.date === new Date(year, month, day)
+      );
+    });
 
     return appointments;
   }
