@@ -20,6 +20,9 @@ import EtherealMailProvider from '@shared/container/providers/MailProvider/imple
 import MailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/MailTemplateProviderInterface';
 import HandlebarsMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/implementations/HandleBarsMailTemplateProvider';
 
+import NotificationsRepositoryInterface from '@modules/notifications/repositories/NotificationsRepositoryInterface';
+import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
+
 container.registerSingleton<AppointmentsRepositoryInterface>(
   'AppointmentsRepository',
   AppointmentRepository,
@@ -48,4 +51,9 @@ container.registerSingleton<MailTemplateProvider>(
 container.registerInstance<MailProviderInterface>(
   'MailProvider',
   container.resolve(EtherealMailProvider),
+);
+
+container.registerSingleton<NotificationsRepositoryInterface>(
+  'NotificationsRepository',
+  NotificationsRepository,
 );

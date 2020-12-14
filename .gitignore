@@ -3,6 +3,7 @@ node_modules
 .vscode/
 build/
 temp
+yarn-error.log
 
 tmp/*
 !tmp/.gitkeep
