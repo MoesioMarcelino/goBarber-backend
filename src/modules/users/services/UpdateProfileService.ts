@@ -12,7 +12,7 @@ interface Request {
   name: string;
   email: string;
   password?: string;
-  oldPassword?: string;
+  old_password?: string;
 }
 
 @injectable()
@@ -30,7 +30,7 @@ class UpdateProfileService {
     name,
     email,
     password,
-    oldPassword,
+    old_password,
   }: Request): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
@@ -47,15 +47,17 @@ class UpdateProfileService {
     user.name = name;
     user.email = email;
 
-    if (password && !oldPassword) {
+    console.log(password, old_password);
+
+    if (password && !old_password) {
       throw new AppError(
         'The old password is required to update your new password',
       );
     }
 
-    if (password && oldPassword) {
+    if (password && old_password) {
       const checkOldPassword = await this.hashProvider.compareHash(
-        oldPassword,
+        old_password,
         user.password,
       );
 

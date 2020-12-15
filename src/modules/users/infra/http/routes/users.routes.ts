@@ -6,6 +6,7 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 
 import UsersController from '@modules/users/infra/http/controllers/UsersController';
 import UserAvatarController from '@modules/users/infra/http/controllers/UserAvatarController';
+import { celebrate, Joi, Segments } from 'celebrate';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
@@ -13,7 +14,17 @@ const upload = multer(uploadConfig);
 const usersControllers = new UsersController();
 const userAvatarController = new UserAvatarController();
 
-usersRouter.post('/', usersControllers.create);
+usersRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().min(6).required(),
+    },
+  }),
+  usersControllers.create,
+);
 
 usersRouter.patch(
   '/avatar',
