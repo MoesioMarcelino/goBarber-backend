@@ -47,8 +47,6 @@ class UpdateProfileService {
     user.name = name;
     user.email = email;
 
-    console.log(password, old_password);
-
     if (password && !old_password) {
       throw new AppError(
         'The old password is required to update your new password',

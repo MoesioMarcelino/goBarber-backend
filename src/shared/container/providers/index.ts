@@ -22,6 +22,8 @@ import HandlebarsMailTemplateProvider from '@shared/container/providers/MailTemp
 
 import NotificationsRepositoryInterface from '@modules/notifications/repositories/NotificationsRepositoryInterface';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
+import CacheProviderInterface from './CacheProvider/models/CacheProviderInterface';
+import RedisCacheProvider from './CacheProvider/implementations/RedisCacheProvider';
 
 container.registerSingleton<AppointmentsRepositoryInterface>(
   'AppointmentsRepository',
@@ -56,4 +58,9 @@ container.registerInstance<MailProviderInterface>(
 container.registerSingleton<NotificationsRepositoryInterface>(
   'NotificationsRepository',
   NotificationsRepository,
+);
+
+container.registerSingleton<CacheProviderInterface>(
+  'CacheProvider',
+  RedisCacheProvider,
 );

@@ -1,3 +1,4 @@
+import CacheProviderInterface from '@shared/container/providers/CacheProvider/models/CacheProviderInterface';
 import { inject, injectable } from 'tsyringe';
 
 import Appointment from '../infra/typeorm/entities/Appointment';
@@ -15,6 +16,9 @@ class ListProviderAppointmentsService {
   constructor(
     @inject('AppointmentsRepository')
     private appointmentRepository: AppointmentsRepositoryInterface,
+
+    @inject('CacheProvider')
+    private cacheProvider: CacheProviderInterface,
   ) {}
 
   public async execute({
@@ -23,14 +27,22 @@ class ListProviderAppointmentsService {
     day,
     year,
   }: Request): Promise<Appointment[]> {
-    const appointments = await this.appointmentRepository.findAllInDayFromProvider(
-      {
+    const cacheKey = `provider-appointments:${provider_id}:${year}-${month}-${day}`;
+
+    let appointments = await this.cacheProvider.recover<Appointment[]>(
+      cacheKey,
+    );
+
+    if (!appointments) {
+      appointments = await this.appointmentRepository.findAllInDayFromProvider({
         provider_id,
         month,
         day,
         year,
-      },
-    );
+      });
+
+      await this.cacheProvider.save(cacheKey, appointments);
+    }
 
     return appointments;
   }
