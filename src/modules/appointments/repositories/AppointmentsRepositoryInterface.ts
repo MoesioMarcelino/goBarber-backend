@@ -13,5 +13,5 @@ export default interface AppointmentsRepositoryInterface {
     data: FindAllInDayFromProviderDTO,
   ): Promise<Appointment[]>;
   create(data: CreateAppointmentDTO): Promise<Appointment>;
-  findByDate(date: Date): Promise<Appointment | undefined>;
+  findByDate(date: Date, provider_id: string): Promise<Appointment | undefined>;
 }
