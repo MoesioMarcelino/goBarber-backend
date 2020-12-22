@@ -17,10 +17,10 @@ import '@shared/container/providers';
 
 const app = express();
 
-app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(`${uploadConfig.tmpFolder}/uploads`));
+app.use(rateLimiter);
 app.use(routes);
 
 app.use(errors());
