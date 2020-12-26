@@ -4,6 +4,7 @@ import User from '@modules/users/infra/typeorm/entities/Users';
 
 import UsersRepositoryInterface from '@modules/users/repositories/UsersRepositoryInterface';
 import CacheProviderInterface from '@shared/container/providers/CacheProvider/models/CacheProviderInterface';
+import { classToClass } from 'class-transformer';
 
 interface Request {
   user_id: string;
@@ -29,7 +30,10 @@ class ListProvidersService {
         expect_user_id: user_id,
       });
 
-      await this.cacheProvider.save(`providers-list:${user_id}`, users);
+      await this.cacheProvider.save(
+        `providers-list:${user_id}`,
+        classToClass(users),
+      );
     }
 
     return users;
