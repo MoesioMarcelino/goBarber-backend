@@ -70,3 +70,9 @@
       token: string,
     }
     ```
+
+## Networking
+- [Portfolio](https://moesiomarcelino.com)
+- [GitHub](https://github.com/MoesioMarcelino)
+- [Linkedin](https://br.linkedin.com/in/moesiomarcelino)
+
